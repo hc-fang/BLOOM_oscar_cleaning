@@ -36,24 +36,25 @@ streamlit run visualization/visualization.py
 
 
 ## Run the filtering
-```
-bash run_filter.sh
-```
+* Run:
+    ```
+    bash run_filter.sh
+    ```
 
-Since our dataset are text files and are separated by "\n\n" between documents, I did some changes to the code: 
+* Since our dataset are text files and are separated by "\n\n" between documents, I did some changes to the code: 
+    ``` 
+    # original bloom implementation to load OSCAR
+    dataset = load_dataset(
+         args.dataset_name,
+         args.config_name,
+         data_files=args.data_files,
+         split=args.split,
+         use_auth_token=True,
+    )
 
-``` 
-# original bloom implementation to load OSCAR
-dataset = load_dataset(
-     args.dataset_name,
-     args.config_name,
-     data_files=args.data_files,
-     split=args.split,
-     use_auth_token=True,
-)
+    # modified 
+    dataset = load_dataset("text", data_files=["test.txt"])
+    dataset = dataset.filter(lambda d: len(d['text']) > 0)
 
-# modified 
-dataset = load_dataset("text", data_files=["test.txt"])
-dataset = dataset.filter(lambda d: len(d['text']) > 0)
-
-```
+    ```
+* If you want to see some examples, then set `--print_examples` in `run_filter.sh` 
