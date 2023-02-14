@@ -1,5 +1,6 @@
 # Usage
 
+This file covers details of step 2, 3, 4 in the original README.md.
 
 ## Installation
 
